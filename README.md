@@ -161,7 +161,8 @@ Upload to GitHub Pages for free hosting.
 
 ```
 ## OUTPUT
-![Uploading image.png…]()
+![image](https://github.com/user-attachments/assets/756177cc-c623-4c2e-8cf3-af89110877ae)
+
 
 ## RESULT
 The program for creating To-do list using JavaScript is executed successfully.
