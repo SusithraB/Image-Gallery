@@ -39,135 +39,129 @@ Upload to GitHub Pages for free hosting.
 ```
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo Application</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f3e5f5; /* Light pastel purple */
-            text-align: center;
-        }
-        header, footer {
-            background-color: #b39ddb; /* Soft pastel purple */
-            color: white;
-            padding: 15px;
-            font-size: 20px;
-            font-weight: bold;
-        }
-        .todo-container {
-            max-width: 400px;
-            background: white;
-            margin: 30px auto;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border: 2px solid #b39ddb;
-        }
-        .todo-input {
-            width: 100%;
-            padding: 10px;
-            border: 2px solid #b39ddb;
-            border-radius: 4px;
-            margin-bottom: 10px;
-        }
-        .todo-list {
-            list-style: none;
-            padding: 0;
-        }
-        .todo-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 10px;
-            margin-bottom: 5px;
-            background-color: #f3e5f5;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        .todo-item.completed span {
-            text-decoration: line-through;
-            color: gray;
-        }
-        .todo-buttons button {
-            padding: 5px 10px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-        .complete-btn {
-            background-color: #9575cd; /* Softer purple */
-            color: white;
-        }
-        .delete-btn {
-            background-color: #f48fb1; /* Soft pink for contrast */
-            color: white;
-        }
+      body {
+        font-family: Arial, sans-serif;
+        background: #f4f4f4;
+        text-align: center;
+      }
+
+      .container {
+        max-width: 400px;
+        margin: 50px auto;
+        padding: 20px;
+        background: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+      }
+
+      h1 {
+        color: #333;
+      }
+
+      .todo-input {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .todo-input input {
+        flex: 1;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+      }
+
+      .todo-input button {
+        padding: 8px 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        cursor: pointer;
+        margin-left: 5px;
+        border-radius: 5px;
+      }
+
+      .todo-input button:hover {
+        background: #218838;
+      }
+
+      ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      li {
+        padding: 10px;
+        background: #f9f9f9;
+        margin: 5px 0;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 5px;
+      }
+
+      li button {
+        background: #dc3545;
+        border: none;
+        color: white;
+        padding: 5px;
+        cursor: pointer;
+        border-radius: 5px;
+      }
+
+      li button:hover {
+        background: #c82333;
+      }
     </style>
-</head>
-<body>
-    <header>Todo Application</header>
-    <div class="todo-container">
-        <h2>To-Do List ✅</h2>
-        <input type="text" id="todo-input" class="todo-input" placeholder="Add a new task">
-        <ul id="todo-list" class="todo-list"></ul>
+  </head>
+  <body>
+    <div class="container">
+      <h1>To-Do List</h1>
+      <div class="todo-input">
+        <input type="text" id="taskInput" placeholder="Add a new task..." />
+        <button onclick="addTask()">Add</button>
+      </div>
+      <ul id="taskList"></ul>
     </div>
-    <footer>&copy; 2025 Deepika S (212222230028) | All rights reserved.</footer>
+
     <script>
-        const todoInput = document.getElementById('todo-input');
-        const todoList = document.getElementById('todo-list');
+      function addTask() {
+        let taskInput = document.getElementById("taskInput");
+        let taskValue = taskInput.value.trim();
 
-        function addTodo() {
-            const task = todoInput.value.trim();
-            if (task === '') return;
-
-            const li = document.createElement('li');
-            li.className = 'todo-item';
-
-            const span = document.createElement('span');
-            span.textContent = task;
-
-            const buttonsDiv = document.createElement('div');
-            buttonsDiv.className = 'todo-buttons';
-
-            const completeBtn = document.createElement('button');
-            completeBtn.textContent = 'Complete';
-            completeBtn.className = 'complete-btn';
-            completeBtn.onclick = () => {
-                li.classList.toggle('completed');
-            };
-
-            const deleteBtn = document.createElement('button');
-            deleteBtn.textContent = 'Delete';
-            deleteBtn.className = 'delete-btn';
-            deleteBtn.onclick = () => {
-                todoList.removeChild(li);
-            };
-
-            buttonsDiv.appendChild(completeBtn);
-            buttonsDiv.appendChild(deleteBtn);
-
-            li.appendChild(span);
-            li.appendChild(buttonsDiv);
-
-            todoList.appendChild(li);
-            todoInput.value = '';
+        if (taskValue === "") {
+          alert("Please enter a task!");
+          return;
         }
 
-        todoInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                addTodo();
-            }
-        });
+        let taskList = document.getElementById("taskList");
+
+        let li = document.createElement("li");
+        li.innerHTML = `
+          ${taskValue}
+          <button onclick="removeTask(this)">Delete</button>
+        `;
+
+        taskList.appendChild(li);
+        taskInput.value = "";
+      }
+
+      function removeTask(button) {
+        let taskList = document.getElementById("taskList");
+        let taskItem = button.parentElement;
+        taskList.removeChild(taskItem);
+      }
     </script>
-</body>
+  </body>
 </html>
 
 ```
 ## OUTPUT
-![todo list](https://github.com/user-attachments/assets/fb876770-5837-4054-b91a-3e6b72033a8d)
+![Uploading image.png…]()
+
 ## RESULT
 The program for creating To-do list using JavaScript is executed successfully.
