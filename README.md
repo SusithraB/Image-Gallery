@@ -1,52 +1,39 @@
-## Activity An Interactive Image Gallery using JavaScript, HTML, and CSS.
-## Date:22.03.20205
-## Aim:
+# Ex03 To-Do List using JavaScript
+## Date:18-03-2025
 
-To create an interactive image gallery with:
+## AIM
+To create a To-do Application with all features using JavaScript.
 
-Horizontal scrollable images.
+## ALGORITHM
+### STEP 1
+Build the HTML structure (index.html).
 
-Captions that appear on hover.
+### STEP 2
+Style the App (style.css).
 
-Next and Previous buttons for navigation.
+### STEP 3
+Plan the features the To-Do App should have.
 
-Responsive design using HTML, CSS, and JavaScript.
+### STEP 4
+Create a To-do application using Javascript.
 
+### STEP 5
+Add functionalities.
 
-## Algorithm:
+### STEP 6
+Test the App.
 
-1. HTML Structure:
+### STEP 7
+Open the HTML file in a browser to check layout and functionality.
 
-Create a gallery container and individual image containers with captions.
+### STEP 8
+Fix styling issues and refine content placement.
 
-Add Next and Previous buttons for navigation.
+### STEP 9
+Deploy the website.
 
-
-
-2. CSS Styling:
-
-Use flexbox to arrange images horizontally.
-
-Add hover effects for captions.
-
-Position buttons on the sides for navigation.
-
-
-
-3. JavaScript:
-
-Track the current image index.
-
-Move gallery left or right on button click.
-
-Ensure smooth transitions and looping (First to Last/Last to First).
-
-
-
-4. Footer:
-
-Display learner's name and register number at the bottom.
-
+### STEP 10
+Upload to GitHub Pages for free hosting.
 
 ## PROGRAM
 ```
@@ -55,164 +42,132 @@ Display learner's name and register number at the bottom.
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Interactive IMAGE Gallery</title>
+    <title>Todo Application</title>
     <style>
-        * {
+        body {
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-        }
-
-        .gallery-container {
-            position: relative;
-            overflow: hidden;
-            width: 80%;
-            height: 500px;
-            margin: 20px auto;
-            max-width: 800px;
-            background-color: #ddd;
-            border-radius: 10px;
-        }
-
-        .image-wrapper {
-            display: flex;
-            transition: transform 1s ease-in-out;
-        }
-
-        .gallery-image {
-            min-width: 100%;
-            position: relative;
-        }
-
-        .gallery-image img {
-            width: 110%;
-            border-radius: 20px;
-            height: 65%;
-            object-fit: cover;
-        }
-
-        .caption {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            background-color: rgba(0, 0, 0, 0.6);
-            color: white;
-            padding: 5px 10px;
-            border-radius: 5px;
-            opacity: 0;
-            transition: opacity 0.3s ease-in-out;
-        }
-
-        .gallery-image:hover .caption {
-            opacity: 1;
-        }
-
-        .nav-btn {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            background-color: rgba(0, 0, 0, 0.5);
-            border: none;
-            color: white;
-            padding: 10px;
-            cursor: pointer;
-            border-radius: 60%;
-        }
-
-        .prev-btn {
-            left: 10px;
-        }
-
-        .next-btn {
-            right: 10px;
-        }
-
-        .footer {
+            background-color: #f3e5f5; /* Light pastel purple */
             text-align: center;
-            padding: 10px;
-            background-color: #333;
-            color: white;
-            margin-top: auto;
         }
-
-        @media (max-width: 768px) {
-            .gallery-container {
-                height: 200px;
-            }
+        header, footer {
+            background-color: #b39ddb; /* Soft pastel purple */
+            color: white;
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .todo-container {
+            max-width: 400px;
+            background: white;
+            margin: 30px auto;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border: 2px solid #b39ddb;
+        }
+        .todo-input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #b39ddb;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+        .todo-list {
+            list-style: none;
+            padding: 0;
+        }
+        .todo-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin-bottom: 5px;
+            background-color: #f3e5f5;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        .todo-item.completed span {
+            text-decoration: line-through;
+            color: gray;
+        }
+        .todo-buttons button {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .complete-btn {
+            background-color: #9575cd; /* Softer purple */
+            color: white;
+        }
+        .delete-btn {
+            background-color: #f48fb1; /* Soft pink for contrast */
+            color: white;
         }
     </style>
 </head>
 <body>
-
-    <div class="gallery-container">
-        <div class="image-wrapper" id="imageWrapper">
-            <div class="gallery-image">
-                <img src="C:\Users\Acer\Desktop\PUPPY 01.png" alt="Image 1">
-                <div class="caption">Caption 1</div>
-            </div>
-            <div class="gallery-image">
-                <img src="C:\Users\Acer\Desktop\PUPPY 04.png" alt="Image 2">
-                <div class="caption">Caption 2</div>
-            </div>
-            <div class="gallery-image">
-                <img src="C:\Users\Acer\Desktop\PUPPY 03.png" alt="Image 3">
-                <div class="caption">Caption 3</div>
-            </div>
-        </div>
-        <button class="nav-btn prev-btn" onclick="prevImage()">&#10094;</button>
-        <button class="nav-btn next-btn" onclick="nextImage()">&#10095;</button>
+    <header>Todo Application</header>
+    <div class="todo-container">
+        <h2>To-Do List ✅</h2>
+        <input type="text" id="todo-input" class="todo-input" placeholder="Add a new task">
+        <ul id="todo-list" class="todo-list"></ul>
     </div>
-
-    <div class="footer">
-        SUSITHRA.B & 212223220113
-    </div>
-
+    <footer>&copy; 2025 Deepika S (212222230028) | All rights reserved.</footer>
     <script>
-        let currentIndex = 0;
+        const todoInput = document.getElementById('todo-input');
+        const todoList = document.getElementById('todo-list');
 
-        function updateGallery() {
-            const imageWrapper = document.getElementById('imageWrapper');
-            const totalImages = document.querySelectorAll('.gallery-image').length;
-            imageWrapper.style.transform = `translateX(-${currentIndex * 100}%)`;
+        function addTodo() {
+            const task = todoInput.value.trim();
+            if (task === '') return;
 
-            if (currentIndex >= totalImages) {
-                currentIndex = 0;
-            } else if (currentIndex < 0) {
-                currentIndex = totalImages - 1;
+            const li = document.createElement('li');
+            li.className = 'todo-item';
+
+            const span = document.createElement('span');
+            span.textContent = task;
+
+            const buttonsDiv = document.createElement('div');
+            buttonsDiv.className = 'todo-buttons';
+
+            const completeBtn = document.createElement('button');
+            completeBtn.textContent = 'Complete';
+            completeBtn.className = 'complete-btn';
+            completeBtn.onclick = () => {
+                li.classList.toggle('completed');
+            };
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.textContent = 'Delete';
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.onclick = () => {
+                todoList.removeChild(li);
+            };
+
+            buttonsDiv.appendChild(completeBtn);
+            buttonsDiv.appendChild(deleteBtn);
+
+            li.appendChild(span);
+            li.appendChild(buttonsDiv);
+
+            todoList.appendChild(li);
+            todoInput.value = '';
+        }
+
+        todoInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                addTodo();
             }
-        }
-
-        function nextImage() {
-            currentIndex++;
-            updateGallery();
-        }
-
-        function prevImage() {
-            currentIndex--;
-            updateGallery();
-        }
+        });
     </script>
-
 </body>
 </html>
+
 ```
-
-## OUTPUT:
-![image](https://github.com/user-attachments/assets/e29bf66e-554e-478b-bb3e-d13cd547c066)
-![image](https://github.com/user-attachments/assets/4c4c40b0-b958-42e5-9b11-20eb57a22f46)
-![image](https://github.com/user-attachments/assets/533b9cb5-29c9-4d3a-a7ba-29f65bae19a0)
-
-
-
-
-
+## OUTPUT
+![todo list](https://github.com/user-attachments/assets/fb876770-5837-4054-b91a-3e6b72033a8d)
 ## RESULT
-Thus the program is executed successfully.
+The program for creating To-do list using JavaScript is executed successfully.
